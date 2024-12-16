@@ -10,7 +10,7 @@ authRouter.post("/signup", async (req, res) => {
     await user.save();
     res.send("user signup successfull");
   } catch (err) {
-    res.status(400).send("signup failed", err);
+    res.status(400).send("signup failed" + err.message);
   }
 });
 
@@ -66,14 +66,22 @@ authRouter.delete("/user", async (req, res) => {
 });
 
 // UPDATE API with id ***************************
-authRouter.patch("/user", async (req, res) => {
-  const userId = req.body.userId;
+
+authRouter.patch("/user/:userId", async (req, res) => {
+  const userId = req.params?.userId;
   const data = req.body;
   try {
-    await User.findByIdAndUpdate(userId, data);
+    const ALLOWED_UPDATES = ["photoUrl", "age", "about", "skills", "gender"];
+    const isUpdatesAllowed = Object.keys(data).every((k) =>
+      ALLOWED_UPDATES.includes(k)
+    );
+    if (!isUpdatesAllowed) {
+      throw new error("update not allowed");
+    }
+    await User.findByIdAndUpdate(userId, data, { runValidators: true });
     res.send("user updated successfully");
   } catch (err) {
-    res.status(400).send("something went wrong", err);
+    res.status(400).send("something went wrong" + err.message);
   }
 });
 
@@ -88,4 +96,23 @@ authRouter.put("/user", async (req, res) => {
     res.status(400).send("something went wrong", err);
   }
 });
+
+// authRouter.patch("/user/:userId", async (req, res) => {
+//   const userId = req.params?.userId;
+//   const data = req.body;
+//   try {
+//     const ALLOWED_UPDATED = ["gender", "about", "skills"];
+//     const isUpdateAllowed = Object.keys(data).every((k) =>
+//       ALLOWED_UPDATED.includes(k)
+//     );
+//     if (!isUpdateAllowed) {
+//       throw new error("update not allowed");
+//     }
+//     const user = await User.findByIdAndUpdate({ _id: userId }, data);
+//     res.send("user updated succesfully");
+//   } catch (error) {
+//     res.status(400).send("updated failed" + error);
+//   }
+// });
+
 module.exports = authRouter;

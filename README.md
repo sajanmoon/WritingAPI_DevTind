@@ -44,3 +44,25 @@
 # UPDATE API with email
 
 - <img src="./images/updatebyemail.png" alt="Logo" width="600">
+
+# VALIDATION ON SCHEMAS
+
+- Make some feild mandatory with required:true (eg.firstName,email,password..etc)
+- With same email there should not be 2 user, using unique:true
+- default value, string etc explore all the documentation
+
+- <img src="./images/validationschema.png" alt="Logo" width="600">
+
+- VALIDATE method ,if in gender only value includes male female then write following code in gender schema
+- Works only when new instance is created
+- if we want to work this on while updating in patch api we should add{ runvalidator:true} parameter
+
+# SANITIZING API
+
+# UPDATE API
+
+- we will validate feild which should be updated
+- to validate feild we will retrict req.body to which data should come for updates
+- the following code to validate api
+
+- <img src="./images/santitizeapi.png" alt="Logo" width="600">
