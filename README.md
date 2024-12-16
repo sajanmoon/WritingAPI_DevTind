@@ -54,6 +54,7 @@
 - <img src="./images/validationschema.png" alt="Logo" width="600">
 
 - VALIDATE method ,if in gender only value includes male female then write following code in gender schema
+- <img src="./images/gendervalidatefeilds.png" alt="Logo" width="600">
 - Works only when new instance is created
 - if we want to work this on while updating in patch api we should add{ runvalidator:true} parameter
 
