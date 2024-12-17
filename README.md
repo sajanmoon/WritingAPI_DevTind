@@ -72,7 +72,7 @@
 - install validator > import in model file
 - write in validate paramater
 
-- <img src="./images/validatorlibrary.png" alt="Logo" width="600">
+- <img src="./images/signupvalidatorfile.png" alt="Logo" width="600">
 
 # Adding Validation in Signup API
 
