@@ -1,14 +1,60 @@
 const express = require("express");
 const User = require("../models/user");
+const { validationSignUpData } = require("../utils/validation");
+const bcrypt = require("bcrypt");
+const validator = require("validator");
 
 const authRouter = express.Router();
 
 authRouter.post("/signup", async (req, res) => {
-  // req.body for a dynamic input
-  const user = new User(req.body);
   try {
+    // Validate the data
+    validationSignUpData(req);
+
+    // Encrypt the password
+    const { firstName, lastName, email, password } = req.body;
+    const passwordHash = await bcrypt.hash(password, 10);
+    console.log(passwordHash);
+
+    // Creating a new instance of user model
+    const user = new User({
+      firstName,
+      lastName,
+      email,
+      password: passwordHash,
+    });
+
     await user.save();
     res.send("user signup successfull");
+  } catch (err) {
+    res.status(400).send("signup failed" + err.message);
+  }
+});
+
+authRouter.post("/login", async (req, res) => {
+  try {
+    // we will get email and password from req.body
+    const { email, password } = req.body;
+
+    // adding validation if entered email is valid or not
+    if (!validator.isEmail(email)) {
+      throw new Error("email not valid");
+    }
+
+    // We will find if user is present in our database
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      throw new Error("User not registerd");
+    }
+
+    // Here we will compare the password which we got
+    // from req.body to which we got from user i.e user.password
+    const isPasswordCorrect = bcrypt.compare(password, user.password);
+    if (isPasswordCorrect) {
+      res.send("Login succesfull");
+    } else {
+      throw new Error("Login failed");
+    }
   } catch (err) {
     res.status(400).send("signup failed" + err.message);
   }

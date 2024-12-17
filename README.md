@@ -65,5 +65,35 @@
 - we will validate feild which should be updated
 - to validate feild we will retrict req.body to which data should come for updates
 - the following code to validate api
-
 - <img src="./images/santitizeapi.png" alt="Logo" width="600">
+
+# Validator external library
+
+- install validator > import in model file
+- write in validate paramater
+
+- <img src="./images/validatorlibrary.png" alt="Logo" width="600">
+
+# Adding Validation in Signup API
+
+- If the data is not valid we will not let the user to register to database
+- for a validation of API we will write function to another folder > file
+- Create a utils folder > validation file
+- Follow the following code
+- <img src="./images/validatorlibrary.png" alt="Logo" width="600">
+
+# ENCRYPYING PASSWORD
+
+- Install package bycrypt
+
+- <img src="./images/bycryptpassword.png" alt="Logo" width="600">
+
+# LOGIN API
+
+- Create login api
+- we will get email and password from req.body
+- adding validation if entered email is valid or not
+- We will find if user is present in our database in User model with help of findOne method
+- Here we will compare the password which we got from req.body to which we got from user i.e user.password
+
+- <img src="./images/loginapi.png" alt="Logo" width="600">
