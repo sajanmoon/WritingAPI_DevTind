@@ -71,8 +71,8 @@
 
 - install validator > import in model file
 - write in validate paramater
+- <img src="./images/validatorlibrary.png" alt="Logo" width="600">
 
-- <img src="./images/signupvalidatorfile.png" alt="Logo" width="600">
 
 # Adding Validation in Signup API
 
@@ -80,7 +80,7 @@
 - for a validation of API we will write function to another folder > file
 - Create a utils folder > validation file
 - Follow the following code
-- <img src="./images/validatorlibrary.png" alt="Logo" width="600">
+- <img src="./images/signupvalidatorfile.png" alt="Logo" width="600">
 
 # ENCRYPYING PASSWORD
 

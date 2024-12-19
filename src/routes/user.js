@@ -51,7 +51,7 @@ authRouter.post("/login", async (req, res) => {
     // from req.body to which we got from user i.e user.password
     const isPasswordCorrect = bcrypt.compare(password, user.password);
     if (isPasswordCorrect) {
-      res.send("Login succesfull");
+      res.send(user);
     } else {
       throw new Error("Login failed");
     }
